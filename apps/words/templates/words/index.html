@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Words Wall</title>
+    <style>
+    div{
+        display: inline-block;
+        width:400px;
+    }
+    </style>
+</head>
+<body>
+    <div class="left">
+        <h1>Add word</h1>
+        <form action="/add" method="post">
+            {% csrf_token %}
+            <input type="text" name="word">
+        <p>Choose color</p>
+        Red: <input type="radio" name="color" value="Red" checked='checked'>
+        Green: <input type="radio" name="color" value="Green">
+        Blue: <input type="radio" name="color" value="Blue">
+        <br>
+        <input type="checkbox" name='big' value="Big"> Make big font
+        <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="right">
+        
+        <form action="/clear" method="post">
+            {% csrf_token %}
+        <input type="submit" value="Clear">
+        </form>
+        {% for x in request.session.word %}
+            {% if x.color == "red1" %}
+            <h1 style="color:red">{{x.word}}</h1>
+            {% endif %}
+
+            {% if x.color == "red2" %}
+            <h3 style="color:red">{{x.word}}</h3>
+            {% endif %}
+
+            {% if x.color == "green1" %}
+            <h1 style="color:green">{{x.word}}</h1>
+            {% endif %}
+
+            {% if x.color == "green2" %}
+            <h3 style="color:green">{{x.word}}</h3>
+            {% endif %}
+
+            {% if x.color == "blue1" %}
+            <h1 style="color:blue">{{x.word}}</h1>
+            {% endif %}
+
+            {% if x.color == "blue2" %}
+            <h3 style="color:blue">{{x.word}}</h3>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>
